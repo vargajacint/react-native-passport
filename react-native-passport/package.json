@@ -1,0 +1,43 @@
+{
+  "name": "react-native-passport",
+  "version": "1.0.0",
+  "description": "React Native DeviceCheck and Intergrity API implementation.",
+  "react-native": "src/index",
+  "source": "src/index",
+  "files": [
+    "src",
+    "android",
+    "ios",
+    "rtn-passport.podspec",
+    "!android/build",
+    "!ios/build",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "keywords": [
+    "react-native",
+    "ios",
+    "android"
+  ],
+  "repository": "https://github.com/vargajacint/react-native-passport",
+  "author": "<Jacint Varga> <vargajacint.personal@gmail.com> (https://github.com/vargajacint)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vargajacint/react-native-passport/issues"
+  },
+  "homepage": "https://github.com/vargajacint/react-native-passport#readme",
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "codegenConfig": {
+    "name": "RTNPassportSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.rtnpassport"
+    }
+  }
+}
