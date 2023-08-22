@@ -28,7 +28,9 @@
 
 @protocol NativePassportSpec <RCTBridgeModule, RCTTurboModule>
 
-- (NSString *)getIdentity;
+- (void)getIdentity:(NSString *)nonce
+            resolve:(RCTPromiseResolveBlock)resolve
+             reject:(RCTPromiseRejectBlock)reject;
 
 @end
 namespace facebook {

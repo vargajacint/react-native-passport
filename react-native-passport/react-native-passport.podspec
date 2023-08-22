@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.source          = { :git => package["repository"], :tag => "#{s.version}" }
 
   s.source_files    = "ios/**/*.{h,m,mm,swift}"
+  s.frameworks = 'DeviceCheck'
 
   install_modules_dependencies(s)
 end
