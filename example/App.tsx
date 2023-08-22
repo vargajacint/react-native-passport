@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -24,14 +24,26 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Passport from 'react-native-passport/src/NativePassport';
+import {getIdentity} from 'react-native-passport/src';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 function Section({children, title}: SectionProps): JSX.Element {
+  const [identity, setIdentity] = useState('');
   const isDarkMode = useColorScheme() === 'dark';
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getIdentity();
+        setIdentity(response ?? 'alma');
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   return (
     <View style={styles.sectionContainer}>
@@ -42,7 +54,7 @@ function Section({children, title}: SectionProps): JSX.Element {
             color: isDarkMode ? Colors.white : Colors.black,
           },
         ]}>
-        {Passport?.getIdentity()}
+        {identity}
       </Text>
       <Text
         style={[

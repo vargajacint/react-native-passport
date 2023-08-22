@@ -21,7 +21,7 @@ protected:
   NativePassportCxxSpecJSI(std::shared_ptr<CallInvoker> jsInvoker);
 
 public:
-  virtual jsi::String getIdentity(jsi::Runtime &rt) = 0;
+  virtual jsi::Value getIdentity(jsi::Runtime &rt, std::optional<jsi::String> nonce) = 0;
 
 };
 
@@ -43,13 +43,13 @@ private:
     Delegate(T *instance, std::shared_ptr<CallInvoker> jsInvoker) :
       NativePassportCxxSpecJSI(std::move(jsInvoker)), instance_(instance) {}
 
-    jsi::String getIdentity(jsi::Runtime &rt) override {
+    jsi::Value getIdentity(jsi::Runtime &rt, std::optional<jsi::String> nonce) override {
       static_assert(
-          bridging::getParameterCount(&T::getIdentity) == 1,
-          "Expected getIdentity(...) to have 1 parameters");
+          bridging::getParameterCount(&T::getIdentity) == 2,
+          "Expected getIdentity(...) to have 2 parameters");
 
-      return bridging::callFromJs<jsi::String>(
-          rt, &T::getIdentity, jsInvoker_, instance_);
+      return bridging::callFromJs<jsi::Value>(
+          rt, &T::getIdentity, jsInvoker_, instance_, std::move(nonce));
     }
 
   private:
